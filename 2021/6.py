@@ -1,30 +1,30 @@
 #!/usr/bin/env python3
+import copy
 
-data = "3,4,3,1,2"
+#data = "3,4,3,1,2"
 
-#data = open('6.input', 'r').read()
+data = open('6.input', 'r').read()
 
-# decrement each element in list by one each day.
-# if any increment is 0, append an 8 to the list, then repeat.
-# once an 8 counts down to zero, restart it at 6.
-# repeat for 80 days.
+data = list(map(int, data.split(",")))
 
-fishtimers = data.split(",")
-fishtimers = list(map(int, fishtimers))
-print(fishtimers)
+fishtimers = {}
+[fishtimers.setdefault(x, 0) for x in range(9)]
+for x in data:
+    fishtimers[x] += 1
 
-def spawn(yesterday):
-    return [8 for x in yesterday if x == 0]
+#print(f"initial state: {fishtimers}")
 
-yesterday = fishtimers
+def getfish(days, fishtimers):
+    for i in range(days):
+        tempdict = {}
+        [tempdict.setdefault(x, 0) for x in range(9)]
+        for x in range(8):
+            tempdict[x] = fishtimers[x+1]
+        tempdict[6] += fishtimers[0]
+        tempdict[8] = fishtimers[0]
+        fishtimers = copy.deepcopy(tempdict)
+        #print(f"After {i} day(s): {fishtimers}")
+    return (sum(fishtimers.values()))
 
-i = 1
-while i <= 256:
-    fishtimers = [x - 1 if x > 0 else 6 for x in fishtimers]
-    # do we need to spawn? (any 0s from yesterday?)
-    fishtimers += spawn(yesterday)
-    yesterday = fishtimers
-    print(f"After {i} day(s): {fishtimers}")
-    i += 1
-
-print(len(fishtimers))
+print(f"Part one: {getfish(80, fishtimers)}")
+print(f"Part two: {getfish(256, fishtimers)}")
