@@ -7,11 +7,23 @@ data = open('7.input', 'r').read()
 
 data = list(map(int, data.split(",")))
 
-median = statistics.median(data)
+def part_one(data):
+    median = statistics.median(data)
+    fuel = 0
+    for i in data:
+        fuel += abs(i - median)
+    return int(fuel)
 
-fuel = 0
+def part_two(data):
+    mean = int(statistics.mean(data))
+    potentials = [mean-1, mean, mean+1]
+    fuelcosts = {}
+    for x in potentials:
+        for pos in data:
+            moves = abs(pos - x)
+            for m in range(moves+1):
+                fuelcosts[x] = fuelcosts.get(x, 0) + m
+    return min(fuelcosts.values())
 
-for i in data:
-    fuel += abs(i - median)
-
-print(int(fuel))
+print(f"Part one: {part_one(data)}")
+print(f"Part two: {part_two(data)}")
