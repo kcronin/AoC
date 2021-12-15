@@ -1,25 +1,27 @@
 #!/usr/bin/env python3
 
-#data = """
-#CH -> B
-#HH -> N
-#CB -> H
-#NH -> C
-#HB -> C
-#HC -> B
-#HN -> C
-#NN -> C
-#BH -> H
-#NC -> B
-#NB -> B
-#BN -> B
-#BB -> N
-#BC -> B
-#CC -> N
-#CN -> C
-#"""
-#
-#template = "NNCB"
+from copy import deepcopy
+
+data = """
+CH -> B
+HH -> N
+CB -> H
+NH -> C
+HB -> C
+HC -> B
+HN -> C
+NN -> C
+BH -> H
+NC -> B
+NB -> B
+BN -> B
+BB -> N
+BC -> B
+CC -> N
+CN -> C
+"""
+
+template = "NNCB"
 
 data = open('14.input', 'r').read()
 template = "BCHCKFFHSKPBSNVVKVSK"
@@ -34,32 +36,25 @@ class Polymer:
             if rule != "":
                 self.rules[rule.split(" -> ")[0]] = rule.split(" -> ")[1]
 
-    def step(self, step_no):
-        result = ''
-
-        for i in range(len(self.template)):
-            pair = self.template[i:i+2]
-            if pair in self.rules:
-                result = result + self.template[i] + self.rules[pair]
-            else:
-                result += pair
-            if i == len(self.template):
-                result += self.template[-1]
-
-        self.template = result
-
-        #print(f"Step {step_no}: length {len(self.template)}, result: {self.template}")
-
     def generate(self):
-        for i in range(1, self.steps+1):
-            self.step(i)
-        return self.template
+        pair_counts = {}
+        for pair in self.rules:
+            pair_counts[pair] = self.template.count(pair)
 
-polymer = Polymer(template, 40, data)
-result = polymer.generate()
-counts = {}
+        for i in range(self.steps):
+            result = deepcopy(pair_counts)
+            for pair, count in pair_counts.items():
+                result[pair] -= count
+                result[pair[0] + self.rules[pair]] += count
+                result[self.rules[pair] + pair[1]] += count
+            pair_counts = result
 
-for char in result:
-    counts[char] = result.count(char)
-#print(counts)
-print(max(counts.values())-min(counts.values()))
+        counts = {}
+        for pair in pair_counts:
+            counts[pair[0]] = counts.get(pair[0], 0) + pair_counts[pair]
+        counts[self.template[-1]] += 1
+
+        return max(counts.values())-min(counts.values())
+
+print(f"Part one: {Polymer(template, 10, data).generate()}") # 2797
+print(f"Part two: {Polymer(template, 40, data).generate()}") # 2926813379532
