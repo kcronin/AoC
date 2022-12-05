@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-with open('input.txt') as f:
-    input = f.readlines()
-
 def prep_input():
+    with open('input.txt') as f:
+        input = f.readlines()
+
     elves_a = []
     elves_b = []
     for pair in input:
@@ -20,6 +20,7 @@ def find_overlaps(elves):
         if ((pair[0][0] >= pair[1][0] and pair[0][1] <= pair[1][1]) or
             (pair[0][0] <= pair[1][0] and pair[0][1] >= pair[1][1])):
             total_1 += 1
+        # part two
         for z in range(pair[0][0], pair[0][1]+1):
             if z in range(pair[1][0], pair[1][1]+1):
                 total_2 += 1
