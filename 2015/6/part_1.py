@@ -6,6 +6,14 @@ with open('input.txt', 'r') as f:
     instructions = f.readlines()
 
 lights = defaultdict(dict)
+# this means we end up with a dictionary of x coordinates (key) pointing to a dictionary (value) where
+# value[y coordinate] = 1 for 'on' and 0 for 'off'.
+# such as:
+#{ 0: {0: 0}}
+# meaning the light at 0,0 = 0 (or 'off')
+# or
+# { 123: {456: 1}}
+# meaning the light at 123,456 = 1 (or 'on')
 
 for inst in instructions:
     inst = inst.replace('turn ', '')
