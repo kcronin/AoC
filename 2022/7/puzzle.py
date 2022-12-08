@@ -42,7 +42,7 @@ for obj in gc.get_objects():
             total += obj.size
 
 # part one
-print(total)
+print(total) # 919137
 
 total_disk = 70000000
 space_needed = 30000000
@@ -56,5 +56,4 @@ for obj in gc.get_objects():
             candidate_size = obj.size
 
 # part two
-print(candidate_size)
-
+print(candidate_size) # 2877389
