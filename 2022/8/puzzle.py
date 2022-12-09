@@ -45,11 +45,6 @@ def part_one(rows, columns):
     return visible # 1840
 
 def part_two(rows, columns):
-    def am_i_tallest(tree, direction):
-        if int(tree) > max([int(x) for x in direction]):
-            return True
-        return False
-
     def count_friends(tree, direction):
         score = 0
         for friend in direction:
@@ -79,10 +74,7 @@ def part_two(rows, columns):
             directions_and_scores = {left: 0, right: 0, above: 0, below: 0}
 
             for direction in directions_and_scores:
-                if am_i_tallest(tree, direction):
-                    directions_and_scores[direction] = len(direction)
-                else:
-                    directions_and_scores[direction] = count_friends(tree, direction)
+                directions_and_scores[direction] = count_friends(tree, direction)
 
             tree_score = numpy.prod(list(directions_and_scores.values()))
             if tree_score > max_score:
