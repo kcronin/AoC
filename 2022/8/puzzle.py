@@ -43,7 +43,8 @@ for row_idx, row in enumerate(rows):
             visible += 1
             continue
 
-print(visible)
+print(visible) # 1840
+
 
 # part_two
 
@@ -64,7 +65,6 @@ def count_friends(tree, direction):
     return score
 
 max_score = 0
-tree_scores = []
 
 for row_idx, row in enumerate(rows):
     # anything on an outer row will have a score of 0
@@ -92,4 +92,4 @@ for row_idx, row in enumerate(rows):
         if tree_score > max_score:
             max_score = tree_score
 
-print(max_score)
+print(max_score) # 405769
