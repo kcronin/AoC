@@ -5,60 +5,74 @@ filename = 'input.txt'
 with open(filename) as f:
     instructions = [inst.strip() for inst in f]
 
-X, cycle, strength = 1, 0, 0
-signal_cycle = 20
+def part_one():
 
-def execute():
-    global cycle, strength, signal_cycle
-    cycle += 1
-    if cycle == signal_cycle:
-        strength += cycle * X
-        signal_cycle += 40
+    X, cycle, strength = 1, 0, 0
+    signal_cycle = 20
 
-for inst in instructions:
-    execute() # increment cycle, but we're still on the current instruction
-    if inst != 'noop':
-        execute() # increment cycle again
-        X += int(inst.split()[1]) # add current instruction to X
+    def execute():
+        nonlocal cycle, strength, signal_cycle
+        cycle += 1
+        if cycle == signal_cycle:
+            strength += cycle * X
+            signal_cycle += 40
 
-print(strength)
+    for inst in instructions:
+        execute() # increment cycle, but we're still on the current instruction
+        if inst != 'noop':
+            execute() # increment cycle again
+            X += int(inst.split()[1]) # add current instruction to X
 
-class Sprite():
-    def __init__(self, center):
-        self.pixels = range(center-1, center+2)
+    return strength
 
-X, cycle, row = 1, 0, 0
+def part_two():
 
-rows = [''] * 6
+    class Sprite():
+        def __init__(self, center):
+            self.pixels = range(center-1, center+2)
 
-def execute2():
-    global cycle, row
-    cycle += 1
-    if cycle != 1:
-        if (cycle - 1) % 40 == 0: # start a new row
-            row += 1
+    X, cycle, row = 1, 0, 0
 
-def draw(row, cycle, sprite):
-    if row > 0:
-        row_pos = cycle - 1 - 40 * row
-    else:
-        row_pos = cycle
+    rows = [''] * 6
 
-    if row_pos in sprite.pixels:
-        rows[row] = rows[row] + '#'
-    else:
-        rows[row] = rows[row] + '.'
+    def execute2():
+        nonlocal cycle, row
+        cycle += 1
+        if cycle != 1:
+            if (cycle - 1) % 40 == 0: # start a new row
+                row += 1
 
-for inst in instructions:
-    execute2()
-    sprite = Sprite(X)
+    def draw(row, cycle, sprite):
+        if row > 0:
+            row_pos = cycle - 1 - 40 * row
+        else:
+            row_pos = cycle
 
-    draw(row, cycle, sprite)
+        if row_pos in sprite.pixels:
+            rows[row] = rows[row] + '#'
+        else:
+            rows[row] = rows[row] + '.'
 
-    if inst != 'noop':
+    for inst in instructions:
         execute2()
-        draw(row, cycle, sprite)
-        X += int(inst.split()[1])
+        sprite = Sprite(X)
 
-for row in rows:
-    print(row)
+        draw(row, cycle, sprite)
+
+        if inst != 'noop':
+            execute2()
+            draw(row, cycle, sprite)
+            X += int(inst.split()[1])
+
+    for row in rows:
+        print(row)
+
+print(part_one()) # 15220
+part_two()
+
+##...###.####.####.##....#....#.#..##...
+#..#.#.......#.#....#.#..#..#.#....#..#.
+#..#.###....#..###..##...###..###..#..#.
+###..#.....#...#....#.#..#..#.#....####.
+#.#..#....#....#....#.#..#..#.#....#..#.
+#..#.#....####.####.#..#.###..#....#..#.
