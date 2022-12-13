@@ -76,10 +76,10 @@ mod = math.prod([m.test for m in monkeys]) # thanks @bgreenlee
 # part 1
 for _ in range(20):
     round(monkeys, 3, mod)
-print(get_total(monkeys))
+print(get_total(monkeys)) # 90882
 
 monkeys = get_monkeys()
 # part 2
 for _ in range(10000):
     round(monkeys, 1, mod)
-print(get_total(monkeys))
+print(get_total(monkeys)) # 30893109657
