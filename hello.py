@@ -11,6 +11,24 @@ def goodbye(name):
     """Print a goodbye message to the given name."""
     print(f"goodbye, {name}!")
     print("See ya later, alligator!")
+    print_alligator()
+
+def print_alligator():
+    """Print an ASCII-art alligator."""
+    alligator = [
+        "    /",
+        "   / \\",
+        "  /   \\",
+        " /     \\",
+        "/       \\",
+        "\\=======>",
+        " \\     /",
+        "  \\   /",
+        "   \\ /",
+        "    \\"
+    ]
+    for line in alligator:
+        print(line)
 
 def ask_how_are_you():
     """Ask the user how they are doing and respond."""
