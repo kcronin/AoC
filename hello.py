@@ -9,6 +9,7 @@ def greet(name):
 def goodbye(name):
     """Print a goodbye message to the given name."""
     print(f"goodbye, {name}!")
+    print("See ya later, alligator!")
 
 def ask_how_are_you():
     """Ask the user how they are doing and respond."""
