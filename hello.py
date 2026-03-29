@@ -5,6 +5,7 @@ import sys
 def greet(name):
     """Print a greeting to the given name."""
     print(f"hello, {name}!")
+    print("Nice to meet you.")
 
 def goodbye(name):
     """Print a goodbye message to the given name."""
