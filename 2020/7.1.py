@@ -42,7 +42,7 @@ def shiny_gold_bag_count(bag_collection, bag_name):
 
 def bags_containing_at_least_one_shiny_gold_bag(bag_collection):
     count = 0
-    
+
     for bag_name in bag_collection.keys():
         if shiny_gold_bag_count(bag_collection, bag_name) > 0:
             print(f"{bag_name} bags contain at least one shiny gold bag!")
@@ -52,4 +52,3 @@ def bags_containing_at_least_one_shiny_gold_bag(bag_collection):
 
 bag_collection = create_data_structure(rules)
 print(bags_containing_at_least_one_shiny_gold_bag(bag_collection))
-

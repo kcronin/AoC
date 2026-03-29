@@ -26,7 +26,3 @@ with open('input.txt', 'r') as f:
             delivered.add(robo_location)
 
 print(len(delivered))
-
-
-
-

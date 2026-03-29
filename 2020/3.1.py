@@ -25,4 +25,4 @@ c = gettrees(5, 1)
 d = gettrees(7, 1)
 e = gettrees(1, 2)
 
-print(f"Got {a} * {b} * {c} * {d} * {e} = {a*b*c*d*e}") 
+print(f"Got {a} * {b} * {c} * {d} * {e} = {a*b*c*d*e}")
