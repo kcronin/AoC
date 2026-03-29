@@ -16,24 +16,36 @@ def goodbye(name):
 def print_alligator():
     """Print an ASCII-art alligator."""
     alligator = [
-        "    /",
-        "   / \\",
-        "  /   \\",
-        " /     \\",
-        "/       \\",
-        "\\=======>",
-        " \\     /",
-        "  \\   /",
-        "   \\ /",
-        "    \\"
+        r"    /",
+        r"   / \\",
+        r"  /   \\",
+        r" /     \\",
+        r"/       \\",
+        r"\\======>",
+        r" \\     /",
+        r"  \\   /",
+        r"   \\ /",
+        r"    \\"
     ]
     for line in alligator:
+        print(line)
+
+def print_cool():
+    """Print an ASCII-art rendering of 'cool'."""
+    cool = [
+        r"  ___   ___   ___   _     ",
+        r" / __| / _ \ / _ \ | |    ",
+        r"| (__  | (_) | (_) | |__  ",
+        r" \___| \___/ \___/ |____| ",
+        r"                           "
+    ]
+    for line in cool:
         print(line)
 
 def ask_how_are_you():
     """Ask the user how they are doing and respond."""
     response = input("How are you doing today? ")
-    print("cool.")
+    print_cool()
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
