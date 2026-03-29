@@ -8,14 +8,25 @@ Functions:
     print_alligator(): Print an ASCII-art alligator.
     print_cool(): Print an ASCII-art rendering of 'cool'.
     ask_how_are_you(): Ask the user how they are doing and respond.
+    add(a, b): Add two numbers and return the sum.
 """
 
 import sys
+import random
+
+def add(a, b):
+    """Add two numbers and return the sum."""
+    return a + b
 
 def greet(name):
     """Print a greeting to the given name."""
     print(f"hello, {name}!")
     print("Nice to meet you.")
+    # Generate two random numbers and add them
+    num1 = random.randint(1, 100)
+    num2 = random.randint(1, 100)
+    total = add(num1, num2)
+    print(f"Did you know that {num1} + {num2} = {total}?")
 
 def goodbye(name):
     """Print a goodbye message to the given name."""
