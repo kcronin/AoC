@@ -1,4 +1,14 @@
 #!/usr/bin/env python3
+"""
+A greeting module with various greeting and display functions.
+
+Functions:
+    greet(name): Print a greeting to the given name.
+    goodbye(name): Print a goodbye message to the given name.
+    print_alligator(): Print an ASCII-art alligator.
+    print_cool(): Print an ASCII-art rendering of 'cool'.
+    ask_how_are_you(): Ask the user how they are doing and respond.
+"""
 
 import sys
 
@@ -47,7 +57,8 @@ def ask_how_are_you():
     response = input("How are you doing today? ")
     print_cool()
 
-if __name__ == "__main__":
+def main():
+    """Main function for command-line usage."""
     if len(sys.argv) > 1:
         name = sys.argv[1]
         action = sys.argv[2] if len(sys.argv) > 2 else "greet"
@@ -60,3 +71,6 @@ if __name__ == "__main__":
     else:
         print("Please provide a name as an argument.")
         print("Usage: hello.py <name> [greet|goodbye]")
+
+if __name__ == "__main__":
+    main()
